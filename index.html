@@ -3,775 +3,261 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>아뜰리에사계 — 내 브랜드 유형 진단</title>
-<meta name="description" content="열심히 하는데 매출이 없거나, 방향을 모르거나, 다음 단계가 막히거나. 이유는 유형마다 다릅니다.">
-
-<!-- ============================================================
-  ★ 폰트 — 변경하려면 아래 Google Fonts 링크와 font-family를 바꾸세요
-============================================================ -->
+<title>브랜드 유형 진단 — 아뜰리에사계</title>
+<meta name="description" content="내 브랜드, 안정형? 불안형? 회피형? 10개의 질문으로 찾아드립니다.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;600&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+
+<script>
+/* ================================================================
+   ✏️  편집 구역 — 여기만 수정하면 됩니다
+   ================================================================ */
+const EDIT = {
+
+  /* 상단 로고 */
+  logo: "아뜰리에사계",
+
+  /* 한 줄 소개 — 진단 시작 전 보이는 문구 */
+  tagline: " ",
+  title:   "내 브랜드,\n지금 어느 단계에 있나요?",
+  desc:    "열심히 하는데 매출이 없거나, 방향을 모르거나, 다음 단계가 막히거나.\n이유는 유형마다 다릅니다. 10개의 질문, Yes / No로만 답하면 됩니다.",
+  btn:     "진단 시작하기",
+
+  /* 이메일 수집 문구 */
+  email_label: "브랜드 운영 인사이트를 이메일로 받아보세요.",
+  email_btn:   "인사이트 받기",
+  email_note:  "아뜰리에사계 · 언제든 수신 거부 가능",
+
+  /* 하단 서명 */
+  footer: "아뜰리에사계",
+
+  /* -------------------------------------------------------
+     질문 10개
+     no: "A" → 불안형 신호 / "Av" → 회피형 신호
+  ------------------------------------------------------- */
+  questions: [
+    { tag:"경쟁 브랜드를 봤을 때",
+      text:"잘 되는 비슷한 브랜드를 봐도 내 방향은 흔들리지 않는다.", no:"A" },
+    { tag:"내 브랜드 한 문장",
+      text:"내 브랜드가 고객의 어떤 문제를 해결하는지 한 문장으로 바로 말할 수 있다.", no:"Av" },
+    { tag:"고객이 나를 다시 찾는 이유",
+      text:"고객이 나를 다시 찾는 이유가 무엇인지 정확히 안다.", no:"Av" },
+    { tag:"트렌드·인사이트",
+      text:"새로운 트렌드나 인사이트를 봤을 때 내 브랜드 기준으로 먼저 걸러본다.", no:"A" },
+    { tag:"오늘 할 일 결정",
+      text:"오늘 브랜드에서 가장 매출에 직결되는 일 하나가 무엇인지 안다.", no:"Av" },
+    { tag:"1년 후 목표",
+      text:"1년 후 내 브랜드가 어떤 모습이어야 하는지 구체적으로 말할 수 있다.", no:"A" },
+    { tag:"내 브랜드 차별성",
+      text:"경쟁 브랜드와 비교했을 때 내 브랜드만이 줄 수 있는 것이 무엇인지 안다.", no:"A" },
+    { tag:"공간·제품 기준",
+      text:"메뉴, 제품, 공간을 만들 때 고객의 문제 해결을 기준으로 결정한다.", no:"Av" },
+    { tag:"인사이트 실행",
+      text:"좋은 아이디어나 인사이트를 발견하면 실제로 내 브랜드에 적용해본다.", no:"Av" },
+    { tag:"매출 구조",
+      text:"지금 하는 활동들이 어떻게 매출로 연결되는지 흐름이 보인다.", no:"Av" }
+  ],
+
+  /* -------------------------------------------------------
+     유형별 결과 — title / insight / pains / guide
+  ------------------------------------------------------- */
+  results: {
+    S: {
+      label: "안정형",
+      title: "내 브랜드의 목표가 명확합니다.\n지금은 한 단계 더 성장이 필요한 상태예요.",
+      insight: "방향이 있고 기준이 있는 브랜드입니다. 경쟁 브랜드를 봐도 흔들리지 않고, 고객이 왜 나를 찾는지도 알고 있어요. 지금 단계에서 막히는 건 방향이 아닙니다. 지금 하는 것들이 더 크게 작동하는 구조 — 레버리지가 필요한 시점입니다.",
+      pains: [
+        "기준은 있는데 그게 고객에게 선명하게 전달되고 있는지 모르겠다",
+        "방향은 맞는 것 같은데 매출이 그 방향만큼 따라오지 않는다",
+        "지금 하는 것들을 더 효율적인 구조로 만들고 싶은데 어떻게 해야 할지 모르겠다"
+      ],
+      guide_title: "안정형 브랜드의 다음 단계는 레버리지 설계입니다",
+      guide: "목표가 명확한 사람에게 더 많은 실행은 답이 아닙니다. 지금 하는 것 중 효과가 가장 큰 하나를 찾아서, 반복 가능한 구조로 만드는 것이 다음 단계예요. 아뜰리에사계는 안정형 브랜드가 다음 레벨로 가는 구체적인 구조 설계를 함께합니다."
+    },
+    A: {
+      label: "불안형",
+      title: "내 브랜드만의 차별점이 아직 없습니다.\n그래서 남의 것을 자꾸 참고하게 됩니다.",
+      insight: "노력이 부족한 게 아닙니다. 내 브랜드가 고객의 어떤 문제를 해결하는지가 명확하지 않으면 잘 되는 브랜드를 볼 때마다 흔들릴 수밖에 없어요. 차별성은 더 잘하는 게 아닙니다. 다르게 정의하는 거예요.",
+      pains: [
+        "열심히 올리는데 반응이 없다. 뭐가 문제인지 모르겠다",
+        "잘 되는 브랜드 볼 때마다 나도 저렇게 해야 하나 싶어서 방향이 계속 바뀐다",
+        "내 브랜드만의 차별점이 뭔지 딱 한 마디로 대답이 안 된다",
+        "희망은 있어서 못 놓겠는데 이것저것 다 해보게 된다",
+        "상품이나 메뉴가 많아졌는데 정작 잘 팔리는 게 없다"
+      ],
+      guide_title: "차별성은 더 잘하는 게 아니라 다르게 정의하는 것입니다",
+      guide: "'내 브랜드는 누구의 어떤 문제를 해결하는가'를 한 문장으로 정의하는 것이 먼저입니다. 이게 없으면 콘텐츠도, 상품도 다 방향이 없어요. 아뜰리에사계는 불안형 브랜드가 자기 차별성을 찾고 정의하는 과정을 함께합니다."
+    },
+    Av: {
+      label: "회피형",
+      title: "무언가를 열심히 하고 있지만,\n그게 매출로 연결되지 않습니다.",
+      insight: "게으른 게 아닙니다. 지금 하는 것들이 고객이 아닌 나 중심으로 돌아가고 있을 가능성이 높아요. 브랜드는 내가 하고 싶은 것이 아니라 고객의 문제를 해결하는 것입니다.",
+      pains: [
+        "하루하루 바쁜데 한 달이 지나도 매출이 그대로다",
+        "내 브랜드가 고객의 어떤 문제를 해결하는지 생각해본 적이 별로 없다",
+        "내 눈엔 좋아 보이는데 고객 반응이 없다. 왜인지 모르겠다",
+        "중요한 걸 해야 한다는 건 아는데 자꾸 미뤄진다",
+        "이것저것 하는데 어느 것도 제대로 된 결과가 없다"
+      ],
+      guide_title: "열심히 하는 것과 잘 하는 것은 다릅니다",
+      guide: "'내가 지금 하는 것들 중 고객이 돈을 내는 이유가 되는 게 무엇인가?' 이 기준 하나만 바뀌어도 지금 하는 것들의 효율이 달라져요. 아뜰리에사계는 회피형 브랜드가 고객 중심으로 운영 방식을 재설계하는 과정을 함께합니다."
+    }
+  }
+};
+/* ================================================================
+   여기까지 편집 구역 끝
+   ================================================================ */
+</script>
 
 <style>
-/* ============================================================
-  CSS 변수 — 색상/폰트 한 곳에서 수정 가능
-============================================================ */
-:root {
-  --bg:        #FAFAF8;        /* ★ 배경색 */
-  --bg2:       #F3F2EE;        /* 섹션 배경 */
-  --ink:       #1A1A18;        /* ★ 기본 텍스트 */
-  --ink2:      #5A5A52;        /* 보조 텍스트 */
-  --ink3:      #9A9A90;        /* 힌트 텍스트 */
-  --accent:    #2D2D28;        /* ★ 강조색 (버튼, 선) */
-  --gold:      #B8965A;        /* ★ 포인트 컬러 */
-  --border:    rgba(26,26,24,.1);
-  --serif:     'Noto Serif KR', serif;
-  --sans:      'Noto Sans KR', sans-serif;
-  --max:       680px;          /* ★ 본문 최대 너비 */
+:root{
+  --bg:#FAFAF8; --bg2:#F3F2EE;
+  --ink:#1A1A18; --ink2:#5A5A52; --ink3:#9A9A90;
+  --gold:#B8965A; --border:rgba(26,26,24,.1);
+  --serif:'Noto Serif KR',serif; --sans:'Noto Sans KR',sans-serif;
 }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;line-height:1.8;min-height:100vh;-webkit-font-smoothing:antialiased}
+.page{max-width:520px;margin:0 auto;padding:0 1.5rem}
 
-/* ============================================================
-  리셋 & 기본
-============================================================ */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { font-size: 16px; scroll-behavior: smooth; }
-body {
-  background: var(--bg);
-  color: var(--ink);
-  font-family: var(--sans);
-  font-weight: 300;
-  line-height: 1.8;
-  -webkit-font-smoothing: antialiased;
-}
-img { max-width: 100%; display: block; }
-a { color: inherit; text-decoration: none; }
+/* 헤더 */
+.top{display:flex;justify-content:center;align-items:center;padding:2.25rem 0 1.75rem;border-bottom:0.5px solid var(--border);margin-bottom:3rem}
+.logo{font-family:var(--serif);font-size:13px;font-weight:400;letter-spacing:.1em;color:var(--ink)}
+.logo-dot{color:var(--gold)}
 
-/* ============================================================
-  레이아웃
-============================================================ */
-.container { max-width: var(--max); margin: 0 auto; padding: 0 1.5rem; }
+/* step */
+.step{display:none}.step.active{display:block}
 
-/* ============================================================
-  헤더
-============================================================ */
-header {
-  position: sticky; top: 0; z-index: 100;
-  background: var(--bg);
-  border-bottom: 0.5px solid var(--border);
-  padding: 1rem 0;
-}
-.header-inner {
-  max-width: var(--max); margin: 0 auto; padding: 0 1.5rem;
-  display: flex; justify-content: space-between; align-items: center;
-}
-.logo {
-  font-family: var(--serif);
-  font-size: 13px;
-  font-weight: 400;
-  letter-spacing: 0.08em;
-  color: var(--ink);
-}
-.logo span { color: var(--gold); }
-.header-cta {
-  font-size: 12px;
-  color: var(--ink2);
-  letter-spacing: 0.04em;
-  border-bottom: 0.5px solid var(--border);
-  padding-bottom: 1px;
-  cursor: pointer;
-  transition: color 0.2s;
-}
-.header-cta:hover { color: var(--ink); border-color: var(--ink); }
+/* 인트로 */
+.intro-tag{font-size:10px;letter-spacing:.14em;color:var(--gold);text-transform:uppercase;margin-bottom:1.1rem;font-weight:400}
+.intro-title{font-family:var(--serif);font-size:clamp(1.6rem,5vw,2.15rem);font-weight:300;line-height:1.42;color:var(--ink);margin-bottom:1rem;letter-spacing:-.01em;white-space:pre-line}
+.intro-title em{font-style:normal;border-bottom:1px solid var(--gold);padding-bottom:1px}
+.intro-desc{font-size:14px;color:var(--ink2);line-height:1.85;margin-bottom:2.25rem;white-space:pre-line}
+.start-btn{width:100%;padding:15px;background:var(--ink);color:var(--bg);border:none;font-family:var(--sans);font-size:14px;font-weight:400;letter-spacing:.06em;cursor:pointer;transition:opacity .2s}
+.start-btn:hover{opacity:.82}
 
-/* ============================================================
-  히어로
-============================================================ */
-.hero {
-  padding: 6rem 0 5rem;
-  border-bottom: 0.5px solid var(--border);
-}
-/* ★ 히어로 레이블 — 수정 가능 */
-.hero-label {
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  color: var(--gold);
-  font-family: var(--sans);
-  font-weight: 400;
-  margin-bottom: 1.5rem;
-  text-transform: uppercase;
-}
-/* ★ 히어로 타이틀 — index.html 본문에서 수정 */
-.hero-title {
-  font-family: var(--serif);
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 400;
-  line-height: 1.3;
-  letter-spacing: -0.01em;
-  color: var(--ink);
-  margin-bottom: 1.5rem;
-}
-.hero-title em {
-  font-style: normal;
-  border-bottom: 1.5px solid var(--gold);
-  padding-bottom: 1px;
-}
-.hero-desc {
-  font-size: 16px;
-  color: var(--ink2);
-  line-height: 1.85;
-  max-width: 520px;
-  margin-bottom: 2.5rem;
-}
-.hero-meta {
-  font-size: 12px;
-  color: var(--ink3);
-  letter-spacing: 0.04em;
-}
-.hero-meta strong { color: var(--ink2); font-weight: 400; }
+/* 진행 바 */
+.pbar-track{height:1px;background:var(--border);margin-bottom:2.5rem}
+.pbar-fill{height:100%;background:var(--gold);transition:width .5s ease}
 
-/* ============================================================
-  섹션 공통
-============================================================ */
-.section { padding: 4rem 0; border-bottom: 0.5px solid var(--border); }
-.section-label {
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  color: var(--gold);
-  text-transform: uppercase;
-  margin-bottom: 1rem;
-  font-weight: 400;
-}
-.section-title {
-  font-family: var(--serif);
-  font-size: clamp(1.4rem, 3vw, 1.9rem);
-  font-weight: 400;
-  line-height: 1.4;
-  color: var(--ink);
-  margin-bottom: 1.25rem;
-}
-.section-body {
-  font-size: 15px;
-  color: var(--ink2);
-  line-height: 1.9;
-}
-.section-body p { margin-bottom: 1rem; }
-.section-body p:last-child { margin-bottom: 0; }
+/* 질문 */
+.q-tag{font-size:10px;letter-spacing:.12em;color:var(--ink3);text-transform:uppercase;margin-bottom:.7rem;font-weight:400}
+.q-text{font-family:var(--serif);font-size:clamp(1.05rem,2.8vw,1.28rem);font-weight:400;color:var(--ink);line-height:1.65;margin-bottom:2rem}
+.yn-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.yn-btn{padding:1.2rem .75rem;border:0.5px solid var(--border);background:var(--bg);font-family:var(--sans);font-size:14px;font-weight:400;color:var(--ink2);cursor:pointer;text-align:center;transition:all .15s;line-height:1.5}
+.yn-btn:hover{border-color:var(--ink2);color:var(--ink)}
+.yn-btn.sel-yes{border-color:#5A7A3A;background:#EFF5E8;color:#3A5A1A}
+.yn-btn.sel-no{border-color:#8A4A2A;background:#F8EDE8;color:#5A2A0A}
+.yn-sub{font-size:10px;display:block;margin-top:4px;opacity:.65}
+.q-nav{display:flex;justify-content:space-between;align-items:center;margin-top:1.25rem}
+.q-back{font-size:12px;color:var(--ink3);background:none;border:none;cursor:pointer;font-family:var(--sans);letter-spacing:.04em}
+.q-back:hover{color:var(--ink2)}
+.q-counter{font-size:11px;color:var(--ink3);letter-spacing:.06em}
 
-/* ============================================================
-  강조 인용
-============================================================ */
-.pullquote {
-  border-left: 2px solid var(--gold);
-  padding: 1.25rem 1.5rem;
-  margin: 2rem 0;
-  background: var(--bg2);
-  border-radius: 0 4px 4px 0;
-}
-.pullquote p {
-  font-family: var(--serif);
-  font-size: 17px;
-  color: var(--ink);
-  line-height: 1.7;
-  margin: 0;
-}
+/* 결과 */
+.res-badge{display:inline-block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:4px 14px;border-radius:20px;margin-bottom:1.25rem;font-weight:400}
+.badge-S{background:#EFF5E8;color:#3A5A1A;border:0.5px solid #A0C070}
+.badge-A{background:#FAF0E0;color:#7A5010;border:0.5px solid #D4A050}
+.badge-Av{background:#F8ECE8;color:#6A2A10;border:0.5px solid #C07050}
+.res-title{font-family:var(--serif);font-size:clamp(1.15rem,3vw,1.48rem);font-weight:400;line-height:1.5;color:var(--ink);margin-bottom:1rem;white-space:pre-line}
+.res-insight{font-size:14px;color:var(--ink2);line-height:1.9;padding:1.1rem 1.3rem;border-left:1.5px solid var(--gold);background:var(--bg2);margin-bottom:1.5rem}
+.pain-label{font-size:10px;letter-spacing:.12em;color:var(--ink3);text-transform:uppercase;margin-bottom:.7rem;font-weight:400}
+.pain-list{list-style:none;margin-bottom:1.5rem}
+.pain-list li{font-size:13px;color:var(--ink2);padding:.6rem 0;border-bottom:0.5px solid var(--border);line-height:1.65;display:flex;gap:.75rem}
+.pain-list li:last-child{border-bottom:none}
+.pain-list li::before{content:'✓';color:var(--gold);flex-shrink:0}
+.guide-box{padding:1.25rem 1.3rem;border:0.5px solid var(--border);margin-bottom:1.75rem}
+.guide-tag{font-size:10px;letter-spacing:.12em;color:var(--gold);text-transform:uppercase;margin-bottom:.4rem;font-weight:400}
+.guide-title{font-family:var(--serif);font-size:15px;font-weight:400;color:var(--ink);margin-bottom:.6rem;line-height:1.45}
+.guide-body{font-size:13px;color:var(--ink2);line-height:1.85}
 
-/* ============================================================
-  3가지 유형 카드
-============================================================ */
-.type-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1px;
-  border: 0.5px solid var(--border);
-  background: var(--border);
-  margin: 2rem 0;
-  border-radius: 8px;
-  overflow: hidden;
-}
-@media(min-width:600px){
-  .type-grid { grid-template-columns: repeat(3,1fr); }
-}
-.type-card {
-  background: var(--bg);
-  padding: 1.75rem 1.5rem;
-}
-.type-card-label {
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  color: var(--gold);
-  text-transform: uppercase;
-  margin-bottom: 0.75rem;
-  font-weight: 400;
-}
-.type-card-title {
-  font-family: var(--serif);
-  font-size: 16px;
-  font-weight: 400;
-  color: var(--ink);
-  line-height: 1.4;
-  margin-bottom: 0.75rem;
-}
-.type-card-desc {
-  font-size: 13px;
-  color: var(--ink2);
-  line-height: 1.75;
-}
+/* 이메일 */
+.email-wrap{border-top:0.5px solid var(--border);padding-top:1.5rem;margin-top:.25rem}
+.email-label{font-size:13px;color:var(--ink2);margin-bottom:.9rem;line-height:1.7}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+@media(max-width:440px){.field-row{grid-template-columns:1fr}}
+.field{width:100%;padding:12px 13px;border:0.5px solid var(--border);background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;font-weight:300;transition:border-color .2s}
+.field::placeholder{color:var(--ink3)}.field:focus{outline:none;border-color:var(--ink2)}
+.sub-btn{width:100%;padding:13px;background:var(--ink);color:var(--bg);border:none;font-family:var(--sans);font-size:14px;font-weight:400;letter-spacing:.04em;cursor:pointer;transition:opacity .2s}
+.sub-btn:hover{opacity:.82}
+.form-note{font-size:11px;color:var(--ink3);text-align:center;margin-top:.6rem;letter-spacing:.04em}
+.done-msg{text-align:center;padding:1.5rem;background:var(--bg2);border:0.5px solid var(--border)}
+.done-msg strong{display:block;font-family:var(--serif);font-size:16px;font-weight:400;color:var(--ink);margin-bottom:.35rem}
+.done-msg span{font-size:12px;color:var(--ink3)}
+.restart-btn{width:100%;padding:11px;margin-top:10px;font-size:12px;letter-spacing:.06em;background:none;border:0.5px solid var(--border);cursor:pointer;color:var(--ink3);font-family:var(--sans)}
+.restart-btn:hover{color:var(--ink2);border-color:var(--ink2)}
 
-/* ============================================================
-  리스트
-============================================================ */
-.check-list { list-style: none; margin: 1.25rem 0; }
-.check-list li {
-  font-size: 14px;
-  color: var(--ink2);
-  padding: 0.65rem 0;
-  border-bottom: 0.5px solid var(--border);
-  line-height: 1.65;
-  display: flex;
-  gap: 0.75rem;
-  align-items: flex-start;
-}
-.check-list li:last-child { border-bottom: none; }
-.check-list li::before {
-  content: '—';
-  color: var(--gold);
-  flex-shrink: 0;
-  margin-top: 1px;
-  font-size: 13px;
-}
+/* 하단 */
+.bottom{text-align:center;padding:2.75rem 0 2.5rem;margin-top:3rem;border-top:0.5px solid var(--border)}
+.bottom-logo{font-family:var(--serif);font-size:12px;color:var(--ink3);letter-spacing:.1em}
 
-/* ============================================================
-  구분선 텍스트
-============================================================ */
-.divider-text {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin: 2.5rem 0;
-  color: var(--ink3);
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-.divider-text::before,
-.divider-text::after {
-  content: '';
-  flex: 1;
-  height: 0.5px;
-  background: var(--border);
-}
-
-/* ============================================================
-  진단 테스트 섹션
-============================================================ */
-.test-section {
-  padding: 4rem 0;
-  background: var(--bg2);
-  border-bottom: 0.5px solid var(--border);
-}
-/* 프로그레스 바 */
-.pbar-track { height: 1.5px; background: var(--border); margin-bottom: 2.5rem; }
-.pbar-fill { height: 100%; background: var(--gold); transition: width 0.5s ease; }
-/* 질문 태그 */
-.q-tag {
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  color: var(--ink3);
-  text-transform: uppercase;
-  margin-bottom: 0.75rem;
-  font-weight: 400;
-}
-/* 질문 텍스트 */
-.q-text {
-  font-family: var(--serif);
-  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
-  font-weight: 400;
-  color: var(--ink);
-  line-height: 1.6;
-  margin-bottom: 2rem;
-}
-/* Yes / No 버튼 */
-.yn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.yn-btn {
-  padding: 1.25rem 1rem;
-  border: 0.5px solid var(--border);
-  border-radius: 4px;
-  background: var(--bg);
-  font-family: var(--sans);
-  font-size: 14px;
-  font-weight: 400;
-  color: var(--ink2);
-  cursor: pointer;
-  text-align: center;
-  transition: all 0.15s;
-  line-height: 1.5;
-}
-.yn-btn:hover { border-color: var(--ink2); color: var(--ink); }
-.yn-btn.sel-yes { border-color: #5A7A3A; background: #F0F5EB; color: #3A5A1A; }
-.yn-btn.sel-no  { border-color: #8A4A2A; background: #F8EDE8; color: #5A2A0A; }
-.yn-sub { font-size: 11px; display: block; margin-top: 4px; opacity: 0.7; }
-.q-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; }
-.q-back {
-  font-size: 12px; color: var(--ink3); background: none; border: none;
-  cursor: pointer; font-family: var(--sans); letter-spacing: 0.04em;
-}
-.q-back:hover { color: var(--ink2); }
-.q-meta { font-size: 11px; color: var(--ink3); letter-spacing: 0.06em; }
-
-/* ============================================================
-  결과 섹션
-============================================================ */
-.res-badge {
-  display: inline-block;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 4px 14px;
-  border-radius: 20px;
-  margin-bottom: 1.25rem;
-  font-weight: 400;
-}
-.badge-S  { background: #EFF5E8; color: #3A5A1A; border: 0.5px solid #A0C070; }
-.badge-A  { background: #FAF0E0; color: #7A5010; border: 0.5px solid #D4A050; }
-.badge-Av { background: #F8ECE8; color: #6A2A10; border: 0.5px solid #C07050; }
-.res-title {
-  font-family: var(--serif);
-  font-size: clamp(1.3rem, 3vw, 1.75rem);
-  font-weight: 400;
-  line-height: 1.45;
-  color: var(--ink);
-  margin-bottom: 1rem;
-  white-space: pre-line;
-}
-.res-insight {
-  font-size: 15px;
-  color: var(--ink2);
-  line-height: 1.9;
-  margin-bottom: 1.5rem;
-  padding: 1.25rem 1.5rem;
-  background: var(--bg);
-  border-left: 2px solid var(--gold);
-}
-.res-pain-label {
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  color: var(--ink3);
-  text-transform: uppercase;
-  margin-bottom: 0.75rem;
-  font-weight: 400;
-}
-.res-pain-list { list-style: none; margin-bottom: 1.5rem; }
-.res-pain-list li {
-  font-size: 14px; color: var(--ink2); padding: 0.65rem 0;
-  border-bottom: 0.5px solid var(--border); line-height: 1.65;
-  display: flex; gap: 0.75rem;
-}
-.res-pain-list li:last-child { border-bottom: none; }
-.res-pain-list li::before { content: '✓'; color: var(--gold); flex-shrink: 0; }
-.guide-block {
-  padding: 1.5rem; border: 0.5px solid var(--border);
-  background: var(--bg); margin-bottom: 1.5rem; border-radius: 4px;
-}
-.guide-label {
-  font-size: 10px; letter-spacing: 0.12em; color: var(--gold);
-  text-transform: uppercase; margin-bottom: 0.5rem; font-weight: 400;
-}
-.guide-title {
-  font-family: var(--serif); font-size: 16px; font-weight: 400;
-  color: var(--ink); margin-bottom: 0.75rem; line-height: 1.4;
-}
-.guide-body { font-size: 13px; color: var(--ink2); line-height: 1.85; }
-.guide-body p { margin-bottom: 0.6rem; }
-.guide-body p:last-child { margin-bottom: 0; }
-
-/* ============================================================
-  이메일 수집 폼
-============================================================ */
-.email-section {
-  padding: 4rem 0;
-  background: var(--ink);
-}
-.email-section .section-label { color: var(--gold); }
-.email-section .section-title { color: #FAFAF8; }
-.email-section .section-body { color: rgba(250,250,248,.6); }
-.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
-@media(max-width:500px){ .field-row { grid-template-columns: 1fr; } }
-.field-input {
-  width: 100%; padding: 13px 16px;
-  border: 0.5px solid rgba(250,250,248,.2);
-  background: rgba(250,250,248,.06);
-  color: #FAFAF8;
-  font-family: var(--sans); font-size: 14px; font-weight: 300;
-  border-radius: 2px;
-  transition: border-color 0.2s;
-}
-.field-input::placeholder { color: rgba(250,250,248,.35); }
-.field-input:focus { outline: none; border-color: var(--gold); }
-.submit-btn {
-  width: 100%; padding: 14px;
-  background: var(--gold);
-  color: #1A1A18;
-  border: none; border-radius: 2px;
-  font-family: var(--sans); font-size: 14px; font-weight: 400;
-  letter-spacing: 0.04em; cursor: pointer;
-  transition: opacity 0.2s;
-}
-.submit-btn:hover { opacity: 0.85; }
-.form-note { font-size: 11px; color: rgba(250,250,248,.3); text-align: center; margin-top: 0.75rem; letter-spacing: 0.04em; }
-.done-msg {
-  text-align: center; padding: 2rem;
-  background: rgba(250,250,248,.06);
-  border: 0.5px solid rgba(250,250,248,.15);
-  border-radius: 4px;
-}
-.done-msg strong { display: block; font-family: var(--serif); font-size: 18px; font-weight: 400; color: #FAFAF8; margin-bottom: 0.5rem; }
-.done-msg span { font-size: 13px; color: rgba(250,250,248,.5); }
-
-/* ============================================================
-  푸터
-============================================================ */
-footer {
-  padding: 2.5rem 0;
-  background: var(--ink);
-  border-top: 0.5px solid rgba(250,250,248,.1);
-}
-.footer-inner {
-  max-width: var(--max); margin: 0 auto; padding: 0 1.5rem;
-  display: flex; justify-content: space-between; align-items: center;
-  flex-wrap: wrap; gap: 0.75rem;
-}
-/* ★ 푸터 텍스트 — 아래 HTML에서 수정 */
-.footer-logo { font-family: var(--serif); font-size: 13px; color: rgba(250,250,248,.5); letter-spacing: 0.08em; }
-.footer-copy { font-size: 11px; color: rgba(250,250,248,.3); letter-spacing: 0.04em; }
-
-/* ============================================================
-  유틸리티
-============================================================ */
-.hidden { display: none !important; }
-.step { display: none; }
-.step.active { display: block; }
-.mt1 { margin-top: 1rem; }
-.mt2 { margin-top: 2rem; }
-.restart-btn {
-  width: 100%; padding: 11px; margin-top: 8px;
-  font-size: 12px; letter-spacing: 0.06em;
-  background: none; border: 0.5px solid var(--border);
-  border-radius: 2px; cursor: pointer; color: var(--ink3);
-  font-family: var(--sans);
-}
-.restart-btn:hover { color: var(--ink2); border-color: var(--ink2); }
-
-/* ============================================================
-  반응형
-============================================================ */
-@media(max-width:600px){
-  .hero { padding: 4rem 0 3.5rem; }
-  .section { padding: 3rem 0; }
-}
-
-/* ============================================================
-  페이드인 애니메이션
-============================================================ */
-@keyframes fadeUp {
-  from { opacity:0; transform:translateY(16px); }
-  to   { opacity:1; transform:translateY(0); }
-}
-.fade-up { animation: fadeUp 0.6s ease both; }
-.fade-up.d1 { animation-delay: 0.1s; }
-.fade-up.d2 { animation-delay: 0.2s; }
-.fade-up.d3 { animation-delay: 0.35s; }
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.fade{animation:fadeUp .55s ease both}
+.d1{animation-delay:.1s}.d2{animation-delay:.2s}.d3{animation-delay:.32s}
 </style>
 </head>
 <body>
+<div class="page">
 
-<!-- ============================================================
-  헤더
-  ★ 로고 텍스트 / 우측 링크 수정 가능
-============================================================ -->
-<header>
-  <div class="header-inner">
-    <div class="logo">아뜰리에사계 <span>✦</span></div>
-    <a class="header-cta" href="#test">브랜드 유형 진단 →</a>
+  <!-- 로고 -->
+  <div class="top">
+    <div class="logo" id="el-logo"></div>
   </div>
-</header>
 
-<!-- ============================================================
-  히어로
-  ★ 제목, 설명, 메타 정보 수정 가능
-============================================================ -->
-<section class="hero">
-  <div class="container">
-    <div class="hero-label fade-up">브랜드 운영 OS 설계</div><!-- ★ 레이블 -->
-    <h1 class="hero-title fade-up d1">
-      나를 알면<br>
-      <em>브랜드 비즈니스가</em><br>
-      선명해집니다
-    </h1><!-- ★ 제목 -->
-    <p class="hero-desc fade-up d2">
-      <!-- ★ 히어로 설명 — 2~3문장 -->
-      열심히 하는데 매출이 없거나, 방향을 모르거나, 다음 단계가 막히거나.
-      이유는 유형마다 다릅니다. 10개의 질문으로 지금 내 패턴을 찾아드립니다.
-    </p>
-    <div class="hero-meta fade-up d3">
-      <strong>아뜰리에사계 · 박슬비</strong>&ensp;|&ensp;브랜드 운영 OS 설계 전문<!-- ★ 메타 -->
+  <!-- 인트로 -->
+  <div class="step active" id="s-intro">
+    <div class="intro-tag fade" id="el-tagline"></div>
+    <h1 class="intro-title fade d1" id="el-title"></h1>
+    <p class="intro-desc fade d2" id="el-desc"></p>
+    <button class="start-btn fade d3" id="el-btn" onclick="startTest()"></button>
+  </div>
+
+  <!-- 질문 -->
+  <div class="step" id="s-q">
+    <div class="pbar-track"><div class="pbar-fill" id="pbar" style="width:0%"></div></div>
+    <div class="q-tag"  id="q-tag"></div>
+    <div class="q-text" id="q-text"></div>
+    <div class="yn-row">
+      <button class="yn-btn" id="btn-yes" onclick="pick('Y')">네, 맞아요<span class="yn-sub">그런 편이다</span></button>
+      <button class="yn-btn" id="btn-no"  onclick="pick('N')">아니요<span class="yn-sub">잘 모르겠다</span></button>
+    </div>
+    <div class="q-nav">
+      <button class="q-back" onclick="prevQ()">← 이전</button>
+      <span class="q-counter" id="q-counter">1 / 10</span>
     </div>
   </div>
-</section>
 
-<!-- ============================================================
-  섹션 1 — 왜 안 되는가
-  ★ 제목, 본문 수정 가능
-============================================================ -->
-<section class="section">
-  <div class="container">
-    <div class="section-label">문제 정의</div><!-- ★ -->
-    <h2 class="section-title">열심히 하는데<br>왜 제자리인가</h2><!-- ★ -->
-    <div class="section-body">
-      <p>
-        <!-- ★ 본문 — 자유롭게 수정 -->
-        국내 자영업자 580만 명. 매년 수많은 브랜드가 생기고 사라집니다.
-        폐업 이유 1위는 차별화 실패예요. 브랜드가 없어서가 아니라,
-        브랜드가 일관되지 않아서입니다.
-      </p>
-      <p>
-        더 열심히 한다고 해결되지 않아요.
-        문제는 실행량이 아니라 방향이에요.
-        그리고 방향은 나를 아는 것에서 시작됩니다.
-      </p>
-    </div>
-
-    <div class="pullquote mt2">
-      <p>
-        <!-- ★ 강조 문구 -->
-        "운영자의 심리적 안정 → 브랜드의 일관성 → 고객의 신뢰 형성.
-        이 흐름은 트렌드가 아닌 인간의 본질이다."
-      </p>
-    </div>
+  <!-- 결과 -->
+  <div class="step" id="s-result">
+    <div id="res-content"></div>
   </div>
-</section>
 
-<!-- ============================================================
-  섹션 2 — 3가지 유형
-  ★ 유형 카드 내용 수정 가능
-============================================================ -->
-<section class="section" style="background:var(--bg2)">
-  <div class="container">
-    <div class="section-label">브랜드 유형</div>
-    <h2 class="section-title">당신의 브랜드는<br>어느 유형인가요</h2>
-    <p class="section-body" style="margin-bottom:0">
-      <!-- ★ -->
-      3가지 유형 중 하나가 지금 내 상태와 맞아떨어집니다.
-      유형을 알면 무엇을 먼저 해야 하는지가 보입니다.
-    </p>
-
-    <div class="type-grid mt2">
-      <!-- ★ 각 카드의 제목과 설명 수정 가능 -->
-      <div class="type-card">
-        <div class="type-card-label">안정형</div>
-        <div class="type-card-title">목표가 명확하다.<br>다음 레벨이 필요하다</div>
-        <div class="type-card-desc">방향은 있는데 매출로 연결되는 구조가 약한 상태. 레버리지 설계가 필요합니다.</div>
-      </div>
-      <div class="type-card">
-        <div class="type-card-label">불안형</div>
-        <div class="type-card-title">차별점이 없어서<br>남의 것을 따라간다</div>
-        <div class="type-card-desc">내 기준이 없어서 외부 자극에 흔들리는 상태. 차별성 정의가 먼저입니다.</div>
-      </div>
-      <div class="type-card">
-        <div class="type-card-label">회피형</div>
-        <div class="type-card-title">열심히 하는데<br>매출로 연결 안 된다</div>
-        <div class="type-card-desc">고객이 아닌 내가 기준인 브랜드. 운영 방식의 재설계가 필요한 상태입니다.</div>
-      </div>
-    </div>
+  <!-- 하단 -->
+  <div class="bottom">
+    <div class="bottom-logo" id="el-footer"></div>
   </div>
-</section>
 
-<!-- ============================================================
-  섹션 3 — 아뜰리에사계 소개
-  ★ 자유롭게 수정 가능
-============================================================ -->
-<section class="section">
-  <div class="container">
-    <div class="section-label">아뜰리에사계</div><!-- ★ -->
-    <h2 class="section-title">브랜드 운영 OS를<br>설계합니다</h2><!-- ★ -->
-    <div class="section-body">
-      <p>
-        <!-- ★ -->
-        컴퓨터의 운영체제처럼 — 어떤 앱이 깔리든 OS가 안정적이어야 합니다.
-        브랜드도 같아요. 디자인이 바뀌든 콘텐츠가 바뀌든,
-        운영자의 기준과 확신이 안정적이어야 브랜드가 흔들리지 않습니다.
-      </p>
-      <p>
-        아뜰리에사계는 결과물을 만들어주지 않아요.
-        스스로 발견하게 하는 환경을 만듭니다.
-        의존이 아닌 자립. 그것이 지속 가능한 브랜드의 조건입니다.
-      </p>
-    </div>
+</div>
 
-    <ul class="check-list mt2">
-      <!-- ★ 리스트 항목 수정/추가 가능 -->
-      <li>운영자의 확신 → 브랜드의 일관성 → 고객의 신뢰</li>
-      <li>손맛나는 디테일로 AI 복제 불가능한 브랜드 결 설계</li>
-      <li>고객이 머물고, 소문 내고, 다시 찾는 구조</li>
-      <li>FnB · 꽃집 · 라이프스타일 브랜드 운영자 전문</li>
-    </ul>
-  </div>
-</section>
-
-<!-- ============================================================
-  진단 테스트 섹션
-  ⚠️ 이 섹션의 질문/답변은 아래 JavaScript에서 수정하세요
-============================================================ -->
-<section class="test-section" id="test">
-  <div class="container">
-    <div class="section-label">무료 브랜드 진단</div>
-    <h2 class="section-title" style="margin-bottom:2.5rem">내 브랜드 유형 찾기</h2>
-
-    <!-- 인트로 -->
-    <div class="step active" id="s-intro">
-      <p class="section-body" style="margin-bottom:2rem">
-        <!-- ★ -->
-        10개의 질문, Yes / No로만 답하면 됩니다.
-        유형마다 다른 인사이트와 브랜드 운영 가이드를 보내드립니다.
-      </p>
-      <button class="submit-btn" onclick="startTest()" style="max-width:280px">
-        지금 바로 진단하기
-      </button>
-    </div>
-
-    <!-- 질문 -->
-    <div class="step" id="s-q">
-      <div class="pbar-track"><div class="pbar-fill" id="pbar" style="width:0%"></div></div>
-      <div class="q-tag" id="q-tag"></div>
-      <div class="q-text" id="q-text"></div>
-      <div class="yn-row">
-        <button class="yn-btn" id="btn-yes" onclick="pick('Y')">네, 맞아요<span class="yn-sub">그런 편이다</span></button>
-        <button class="yn-btn" id="btn-no"  onclick="pick('N')">아니요<span class="yn-sub">잘 모르겠다</span></button>
-      </div>
-      <div class="q-nav">
-        <button class="q-back" onclick="prevQ()">← 이전</button>
-        <span class="q-meta" id="q-meta">1 / 10</span>
-      </div>
-    </div>
-
-    <!-- 결과 -->
-    <div class="step" id="s-result">
-      <div id="res-content"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-  이메일 수집 (결과 없이 직접 구독)
-  ★ 제목, 설명 수정 가능
-============================================================ -->
-<section class="email-section" id="subscribe">
-  <div class="container">
-    <div class="section-label">브랜드 인사이트</div><!-- ★ -->
-    <h2 class="section-title" style="font-family:var(--serif);color:#FAFAF8;font-weight:400;margin-bottom:0.75rem">
-      <!-- ★ -->
-      브랜드 운영 인사이트를<br>이메일로 받아보세요
-    </h2>
-    <p class="section-body" style="margin-bottom:2rem">
-      <!-- ★ -->
-      유형에 맞는 브랜드 운영 인사이트를 순서대로 보내드립니다.
-      광고 없이 콘텐츠만 발송됩니다.
-    </p>
-
-    <div id="sub-form">
-      <div class="field-row">
-        <input class="field-input" type="text"  id="sub-name"  placeholder="이름" /><!-- ★ -->
-        <input class="field-input" type="email" id="sub-email" placeholder="이메일 주소" /><!-- ★ -->
-      </div>
-      <button class="submit-btn" onclick="doSubscribe()">인사이트 받기</button><!-- ★ 버튼 텍스트 -->
-      <div class="form-note">아뜰리에사계 · 언제든 수신 거부 가능</div><!-- ★ -->
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-  푸터
-  ★ 텍스트 수정 가능
-============================================================ -->
-<footer>
-  <div class="footer-inner">
-    <div class="footer-logo">아뜰리에사계 ✦ 박슬비</div><!-- ★ -->
-    <div class="footer-copy">© 2025 아뜰리에사계. All rights reserved.</div><!-- ★ -->
-  </div>
-</footer>
-
-
-<!-- ============================================================
-  JavaScript
-  ★★ 질문과 답변은 아래 Qs 배열에서 수정하세요
-  ★★ 결과 텍스트는 RD 객체에서 수정하세요
-============================================================ -->
 <script>
-// ============================================================
-// ★ 질문 10개 — text: 질문 / no: 'A'(불안형) or 'Av'(회피형)
-// ============================================================
-const Qs = [
-  { tag:"경쟁 브랜드를 봤을 때",       text:"잘 되는 비슷한 브랜드를 봐도 내 방향은 흔들리지 않는다.",                          no:"A"  },
-  { tag:"내 브랜드 한 문장",            text:"내 브랜드가 고객의 어떤 문제를 해결하는지 한 문장으로 바로 말할 수 있다.",          no:"Av" },
-  { tag:"고객이 나를 다시 찾는 이유",   text:"고객이 나를 다시 찾는 이유가 무엇인지 정확히 안다.",                               no:"Av" },
-  { tag:"트렌드·인사이트",              text:"새로운 트렌드나 인사이트를 봤을 때 내 브랜드 기준으로 먼저 걸러본다.",              no:"A"  },
-  { tag:"오늘 할 일 결정",              text:"오늘 브랜드에서 가장 매출에 직결되는 일 하나가 무엇인지 안다.",                     no:"Av" },
-  { tag:"1년 후 목표",                  text:"1년 후 내 브랜드가 어떤 모습이어야 하는지 구체적으로 말할 수 있다.",               no:"A"  },
-  { tag:"내 브랜드 차별성",             text:"경쟁 브랜드와 비교했을 때 내 브랜드만이 줄 수 있는 것이 무엇인지 안다.",           no:"A"  },
-  { tag:"공간·제품 기준",               text:"메뉴, 제품, 공간을 만들 때 고객의 문제 해결을 기준으로 결정한다.",                  no:"Av" },
-  { tag:"인사이트 실행",                text:"좋은 아이디어나 인사이트를 발견하면 실제로 내 브랜드에 적용해본다.",                no:"Av" },
-  { tag:"매출 구조",                    text:"지금 하는 활동들이 어떻게 매출로 연결되는지 흐름이 보인다.",                        no:"Av" }
-];
+/* EDIT 객체로 HTML 채우기 */
+document.getElementById('el-logo').innerHTML    = EDIT.logo + ' <span class="logo-dot">✦</span>';
+document.getElementById('el-tagline').textContent = EDIT.tagline;
+document.getElementById('el-title').textContent   = EDIT.title;
+document.getElementById('el-desc').textContent    = EDIT.desc;
+document.getElementById('el-btn').textContent     = EDIT.btn;
+document.getElementById('el-footer').textContent  = EDIT.footer;
 
-// ============================================================
-// ★ 유형별 결과 텍스트 — 자유롭게 수정 가능
-// ============================================================
+/* 테스트 로직 */
+const Qs = EDIT.questions;
 const RD = {
-  S: {
-    badge:"badge-S", label:"안정형",
-    title:"내 브랜드의 목표가 명확합니다.\n지금은 한 단계 더 성장이 필요한 상태예요.",
-    insight:"방향이 있고 기준이 있는 브랜드입니다. 경쟁 브랜드를 봐도 흔들리지 않고, 고객이 왜 나를 찾는지도 알고 있어요. 지금 단계에서 막히는 건 방향이 아닙니다. 지금 하는 것들이 더 크게 작동하는 구조 — 레버리지가 필요한 시점입니다.",
-    pains: [
-      "기준은 있는데 그게 고객에게 얼마나 선명하게 전달되고 있는지 모르겠다",
-      "방향은 맞는 것 같은데 매출이 그 방향만큼 따라오지 않는다",
-      "지금 하는 것들을 더 효율적인 구조로 만들고 싶은데 어떻게 해야 할지 모르겠다"
-    ],
-    guide_title:"안정형 브랜드의 다음 단계는 레버리지 설계입니다",
-    guide:"<p>목표가 명확한 사람에게 더 많은 실행은 답이 아닙니다. 지금 하는 것 중 효과가 가장 큰 하나를 찾아서, 그것을 반복 가능한 구조로 만드는 것이 다음 단계예요.</p><p>아뜰리에사계는 안정형 브랜드가 다음 레벨로 가는 구체적인 구조 설계를 함께합니다.</p>"
-  },
-  A: {
-    badge:"badge-A", label:"불안형",
-    title:"내 브랜드만의 차별점이 아직 없습니다.\n그래서 남의 것을 자꾸 참고하게 됩니다.",
-    insight:"노력이 부족한 게 아닙니다. 내 브랜드가 고객의 어떤 문제를 해결하는지, 왜 나여야 하는지가 명확하지 않으면 잘 되는 브랜드를 볼 때마다 흔들릴 수밖에 없어요. 차별성은 더 잘하는 게 아닙니다. 다르게 정의하는 거예요.",
-    pains: [
-      "열심히 올리는데 반응이 없다. 뭐가 문제인지 모르겠다",
-      "잘 되는 브랜드 볼 때마다 나도 저렇게 해야 하나 싶어서 방향이 계속 바뀐다",
-      "내 브랜드만의 차별점이 뭔지 물어보면 딱 한 마디로 대답이 안 된다",
-      "희망은 있어서 못 놓겠는데, 뭘 해야 할지 몰라서 이것저것 다 해보게 된다",
-      "상품이나 메뉴가 너무 많아졌는데 정작 잘 팔리는 게 없다"
-    ],
-    guide_title:"차별성은 더 잘하는 게 아니라 다르게 정의하는 것입니다",
-    guide:"<p>지금 가장 먼저 필요한 건 '내 브랜드는 누구의 어떤 문제를 해결하는가'를 한 문장으로 정의하는 것입니다. 이게 없으면 콘텐츠도, 상품도, 고객 응대도 다 방향이 없어요.</p><p>아뜰리에사계는 불안형 브랜드가 자기 차별성을 찾고 정의하는 과정을 함께합니다.</p>"
-  },
-  Av: {
-    badge:"badge-Av", label:"회피형",
-    title:"무언가를 열심히 하고 있지만,\n그게 매출로 연결되지 않습니다.",
-    insight:"게으른 게 아닙니다. 바쁘게 움직이고 있는데 매출이 없다면, 지금 하는 것들이 고객이 아닌 나 중심으로 돌아가고 있을 가능성이 높아요. 브랜드는 내가 하고 싶은 것이 아니라 고객의 문제를 해결하는 것입니다.",
-    pains: [
-      "하루하루 바쁜데 한 달이 지나도 매출이 그대로다",
-      "내 브랜드가 고객의 어떤 문제를 해결하는지 생각해본 적이 별로 없다",
-      "열심히 만들고 올리는데 고객 반응이 없다. 내 눈엔 좋아 보이는데 왜인지 모르겠다",
-      "중요한 걸 해야 한다는 건 아는데, 그게 뭔지 정하는 게 자꾸 미뤄진다",
-      "SNS, 블로그, 행사 등 이것저것 하고 있는데 어느 것도 제대로 된 결과가 없다"
-    ],
-    guide_title:"열심히 하는 것과 잘 하는 것은 다릅니다",
-    guide:"<p>'내가 지금 하는 것들 중 고객이 돈을 내는 이유가 되는 게 무엇인가?' 이 기준 하나만 바뀌어도 지금 하는 것들의 효율이 달라져요.</p><p>아뜰리에사계는 회피형 브랜드가 고객 중심으로 운영 방식을 재설계하는 과정을 함께합니다.</p>"
-  }
+  S:  { badge:'badge-S',  ...EDIT.results.S  },
+  A:  { badge:'badge-A',  ...EDIT.results.A  },
+  Av: { badge:'badge-Av', ...EDIT.results.Av }
 };
 
-// ============================================================
-// 테스트 로직 — 수정 불필요
-// ============================================================
-let ans=[], cur=0, yesCount=0, noA=0, noAv=0;
+let ans=[], cur=0, yC=0, nA=0, nAv=0;
 
 function startTest(){
   document.getElementById('s-intro').classList.remove('active');
@@ -780,30 +266,37 @@ function startTest(){
 }
 
 function renderQ(){
-  const q = Qs[cur];
-  document.getElementById('pbar').style.width = (cur/Qs.length*100)+'%';
-  document.getElementById('q-meta').textContent = (cur+1)+' / '+Qs.length;
-  document.getElementById('q-tag').textContent  = q.tag;
-  document.getElementById('q-text').textContent = q.text;
-  document.getElementById('btn-yes').className = 'yn-btn'+(ans[cur]==='Y'?' sel-yes':'');
-  document.getElementById('btn-no').className  = 'yn-btn'+(ans[cur]==='N'?' sel-no':'');
+  const q=Qs[cur];
+  document.getElementById('pbar').style.width=(cur/Qs.length*100)+'%';
+  document.getElementById('q-counter').textContent=(cur+1)+' / '+Qs.length;
+  document.getElementById('q-tag').textContent=q.tag;
+  document.getElementById('q-text').textContent=q.text;
+  document.getElementById('btn-yes').className='yn-btn'+(ans[cur]==='Y'?' sel-yes':'');
+  document.getElementById('btn-no').className='yn-btn'+(ans[cur]==='N'?' sel-no':'');
 }
 
 function pick(v){
   if(ans[cur]!==undefined){
-    if(ans[cur]==='Y') yesCount--;
-    else { if(Qs[cur].no==='A') noA--; else noAv--; }
+    if(ans[cur]==='Y') yC--;
+    else{ if(Qs[cur].no==='A') nA--; else nAv--; }
   }
   ans[cur]=v;
-  if(v==='Y'){ yesCount++; document.getElementById('btn-yes').className='yn-btn sel-yes'; document.getElementById('btn-no').className='yn-btn'; }
-  else { if(Qs[cur].no==='A') noA++; else noAv++; document.getElementById('btn-no').className='yn-btn sel-no'; document.getElementById('btn-yes').className='yn-btn'; }
-  setTimeout(()=>{ cur<Qs.length-1 ? (cur++, renderQ()) : showResult(); }, 350);
+  if(v==='Y'){
+    yC++;
+    document.getElementById('btn-yes').className='yn-btn sel-yes';
+    document.getElementById('btn-no').className='yn-btn';
+  } else {
+    if(Qs[cur].no==='A') nA++; else nAv++;
+    document.getElementById('btn-no').className='yn-btn sel-no';
+    document.getElementById('btn-yes').className='yn-btn';
+  }
+  setTimeout(()=>{ cur<Qs.length-1?(cur++,renderQ()):showResult(); },350);
 }
 
 function prevQ(){
   if(cur>0){
-    if(ans[cur-1]==='Y') yesCount--;
-    else { if(Qs[cur-1].no==='A') noA--; else noAv--; }
+    if(ans[cur-1]==='Y') yC--;
+    else{ if(Qs[cur-1].no==='A') nA--; else nAv--; }
     ans.splice(cur-1,1); cur--; renderQ();
   } else {
     document.getElementById('s-q').classList.remove('active');
@@ -813,81 +306,62 @@ function prevQ(){
 
 function showResult(){
   document.getElementById('pbar').style.width='100%';
-  let type = yesCount>=7 ? 'S' : (noA>=noAv ? 'A' : 'Av');
+  const type = yC>=7?'S':(nA>=nAv?'A':'Av');
   const r = RD[type];
   document.getElementById('s-q').classList.remove('active');
   document.getElementById('s-result').classList.add('active');
-  document.getElementById('res-content').innerHTML = `
+  document.getElementById('res-content').innerHTML=`
     <div class="res-badge ${r.badge}">${r.label}</div>
     <div class="res-title">${r.title}</div>
     <div class="res-insight">${r.insight}</div>
-    <div class="res-pain-label">지금 이런 상황이 맞나요?</div>
-    <ul class="res-pain-list">${r.pains.map(p=>`<li>${p}</li>`).join('')}</ul>
-    <div class="guide-block">
-      <div class="guide-label">유형별 인사이트</div>
+    <div class="pain-label">지금 이런 상황이 맞나요?</div>
+    <ul class="pain-list">${r.pains.map(p=>`<li>${p}</li>`).join('')}</ul>
+    <div class="guide-box">
+      <div class="guide-tag">유형별 인사이트</div>
       <div class="guide-title">${r.guide_title}</div>
       <div class="guide-body">${r.guide}</div>
     </div>
-    <div style="margin-top:1.5rem">
-      <p style="font-size:13px;color:var(--ink2);margin-bottom:1rem">
-        유형에 맞는 브랜드 운영 인사이트를 이메일로 받아보세요.
-      </p>
+    <div class="email-wrap">
+      <div class="email-label">${EDIT.email_label}</div>
       <div class="field-row">
-        <input class="field-input" type="text"  id="res-name"  placeholder="이름" style="border-color:var(--border);background:var(--bg)" />
-        <input class="field-input" type="email" id="res-email" placeholder="이메일 주소" style="border-color:var(--border);background:var(--bg)" />
+        <input class="field" type="text"  id="r-name"  placeholder="이름" />
+        <input class="field" type="email" id="r-email" placeholder="이메일 주소" />
       </div>
-      <button class="submit-btn" onclick="doResSubmit('${type}')" style="background:var(--accent);color:#FAFAF8">인사이트 받기</button>
-      <div class="form-note" style="color:var(--ink3)">아뜰리에사계 · 언제든 수신 거부 가능</div>
+      <button class="sub-btn" onclick="doSubmit('${type}')">${EDIT.email_btn}</button>
+      <div class="form-note">${EDIT.email_note}</div>
     </div>
     <button class="restart-btn" onclick="restart()">처음부터 다시 하기</button>
   `;
 }
 
-async function doResSubmit(type){
-  const name  = (document.getElementById('res-name').value.trim())  || '대표님';
-  const email = document.getElementById('res-email').value.trim();
+async function doSubmit(type){
+  const name  = document.getElementById('r-name').value.trim() || '대표님';
+  const email = document.getElementById('r-email').value.trim();
   if(!email||!email.includes('@')){ alert('이메일을 올바르게 입력해주세요.'); return; }
-  await sendForm(name, email, type);
-  document.querySelector('#res-content > div:nth-last-child(3)').innerHTML =
-    `<div class="done-msg" style="background:var(--bg2);border-color:var(--border)">
-      <strong style="color:var(--ink)">${name}님, 신청이 완료됐습니다</strong>
-      <span style="color:var(--ink2)">${email}로 인사이트를 보내드립니다</span>
-    </div>`;
-}
-
-async function doSubscribe(){
-  const name  = (document.getElementById('sub-name').value.trim())  || '대표님';
-  const email = document.getElementById('sub-email').value.trim();
-  if(!email||!email.includes('@')){ alert('이메일을 올바르게 입력해주세요.'); return; }
-  await sendForm(name, email, 'subscribe');
-  document.getElementById('sub-form').innerHTML =
-    `<div class="done-msg">
-      <strong>${name}님, 신청이 완료됐습니다</strong>
-      <span>${email}로 인사이트를 보내드립니다</span>
-    </div>`;
-}
-
-// ★ 이메일 수신 주소 — ssfwteam@gmail.com
-async function sendForm(name, email, type){
-  try {
-    await fetch('https://formsubmit.co/ajax/ssfwteam@gmail.com', {
+  const btn = document.querySelector('.sub-btn');
+  btn.textContent='전송 중...'; btn.disabled=true;
+  try{
+    await fetch('https://formsubmit.co/ajax/ssfwteam@gmail.com',{
       method:'POST',
       headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body: JSON.stringify({
-        name, email, type,
+      body:JSON.stringify({ name, email, type,
         _subject:`[아뜰리에사계] ${type} / ${name}`,
         _captcha:'false'
       })
     });
   } catch(e){}
+  document.querySelector('.email-wrap').innerHTML=`
+    <div class="done-msg">
+      <strong>${name}님, 신청이 완료됐습니다</strong>
+      <span>${email}로 인사이트를 보내드립니다</span>
+    </div>`;
 }
 
 function restart(){
-  ans=[]; cur=0; yesCount=0; noA=0; noAv=0;
+  ans=[];cur=0;yC=0;nA=0;nAv=0;
   document.getElementById('s-result').classList.remove('active');
   document.getElementById('s-intro').classList.add('active');
 }
 </script>
-
 </body>
 </html>
