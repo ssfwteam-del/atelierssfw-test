@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>브랜드 유형 진단 — 아뜰리에사계</title>
-<meta name="description" content="내 브랜드, 안정형? 불안형? 회피형? 10개의 질문으로 찾아드립니다.">
+<meta name="description" content="내 브랜드, 안정형? 불안형? 방어형? 10개의 질문으로 찾아드립니다.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
 
@@ -14,58 +14,56 @@
    ================================================================ */
 const EDIT = {
 
-  /* 상단 로고 */
-  logo: "아뜰리에사계",
-
-  /* 한 줄 소개 — 진단 시작 전 보이는 문구 */
-  tagline: " ",
+  logo:    "아뜰리에사계",
+  tagline: "브랜드 운영 OS 설계 전문",
   title:   "내 브랜드,\n지금 어느 단계에 있나요?",
   desc:    "열심히 하는데 매출이 없거나, 방향을 모르거나, 다음 단계가 막히거나.\n이유는 유형마다 다릅니다. 10개의 질문, Yes / No로만 답하면 됩니다.",
   btn:     "진단 시작하기",
 
-  /* 이메일 수집 문구 */
-  email_label: "브랜드 운영 인사이트를 이메일로 받아보세요.",
+  email_label: "유형에 맞는 브랜드 운영 인사이트를 이메일로 받아보세요.",
   email_btn:   "인사이트 받기",
   email_note:  "아뜰리에사계 · 언제든 수신 거부 가능",
+  footer:      "아뜰리에사계 ✦ 박슬비",
 
-  /* 하단 서명 */
-  footer: "아뜰리에사계",
+  /* ★ 스티비 API 키 */
+  stibee_api_key: "여기에_스티비_API_키_입력",
+  stibee_list_id: "여기에_주소록_ID_입력",
 
   /* -------------------------------------------------------
      질문 10개
-     no: "A" → 불안형 신호 / "Av" → 회피형 신호
+     no: "A" → 불안형 신호 / "D" → 방어형 신호
   ------------------------------------------------------- */
   questions: [
     { tag:"경쟁 브랜드를 봤을 때",
       text:"잘 되는 비슷한 브랜드를 봐도 내 방향은 흔들리지 않는다.", no:"A" },
     { tag:"내 브랜드 한 문장",
-      text:"내 브랜드가 고객의 어떤 문제를 해결하는지 한 문장으로 바로 말할 수 있다.", no:"Av" },
+      text:"내 브랜드가 고객의 어떤 문제를 해결하는지 한 문장으로 바로 말할 수 있다.", no:"D" },
     { tag:"고객이 나를 다시 찾는 이유",
-      text:"고객이 나를 다시 찾는 이유가 무엇인지 정확히 안다.", no:"Av" },
+      text:"고객이 나를 다시 찾는 이유가 무엇인지 정확히 안다.", no:"D" },
     { tag:"트렌드·인사이트",
       text:"새로운 트렌드나 인사이트를 봤을 때 내 브랜드 기준으로 먼저 걸러본다.", no:"A" },
     { tag:"오늘 할 일 결정",
-      text:"오늘 브랜드에서 가장 매출에 직결되는 일 하나가 무엇인지 안다.", no:"Av" },
+      text:"오늘 브랜드에서 가장 매출에 직결되는 일 하나가 무엇인지 안다.", no:"D" },
     { tag:"1년 후 목표",
       text:"1년 후 내 브랜드가 어떤 모습이어야 하는지 구체적으로 말할 수 있다.", no:"A" },
     { tag:"내 브랜드 차별성",
       text:"경쟁 브랜드와 비교했을 때 내 브랜드만이 줄 수 있는 것이 무엇인지 안다.", no:"A" },
     { tag:"공간·제품 기준",
-      text:"메뉴, 제품, 공간을 만들 때 고객의 문제 해결을 기준으로 결정한다.", no:"Av" },
+      text:"메뉴, 제품, 공간을 만들 때 고객의 문제 해결을 기준으로 결정한다.", no:"D" },
     { tag:"인사이트 실행",
-      text:"좋은 아이디어나 인사이트를 발견하면 실제로 내 브랜드에 적용해본다.", no:"Av" },
+      text:"좋은 아이디어나 인사이트를 발견하면 실제로 내 브랜드에 적용해본다.", no:"D" },
     { tag:"매출 구조",
-      text:"지금 하는 활동들이 어떻게 매출로 연결되는지 흐름이 보인다.", no:"Av" }
+      text:"지금 하는 활동들이 어떻게 매출로 연결되는지 흐름이 보인다.", no:"D" }
   ],
 
   /* -------------------------------------------------------
-     유형별 결과 — title / insight / pains / guide
+     유형별 결과
   ------------------------------------------------------- */
   results: {
     S: {
       label: "안정형",
       title: "내 브랜드의 목표가 명확합니다.\n지금은 한 단계 더 성장이 필요한 상태예요.",
-      insight: "방향이 있고 기준이 있는 브랜드입니다. 경쟁 브랜드를 봐도 흔들리지 않고, 고객이 왜 나를 찾는지도 알고 있어요. 지금 단계에서 막히는 건 방향이 아닙니다. 지금 하는 것들이 더 크게 작동하는 구조 — 레버리지가 필요한 시점입니다.",
+      insight: "기준이 안에 있고, 계속 갱신되는 브랜드입니다. 앎이 살아있는 상태예요. 경쟁 브랜드를 봐도 흔들리지 않고, 고객이 왜 나를 찾는지도 알고 있어요. 지금 단계에서 막히는 건 방향이 아닙니다. 지금 하는 것들이 더 크게 작동하는 구조 — 레버리지가 필요한 시점입니다.",
       pains: [
         "기준은 있는데 그게 고객에게 선명하게 전달되고 있는지 모르겠다",
         "방향은 맞는 것 같은데 매출이 그 방향만큼 따라오지 않는다",
@@ -77,7 +75,7 @@ const EDIT = {
     A: {
       label: "불안형",
       title: "내 브랜드만의 차별점이 아직 없습니다.\n그래서 남의 것을 자꾸 참고하게 됩니다.",
-      insight: "노력이 부족한 게 아닙니다. 내 브랜드가 고객의 어떤 문제를 해결하는지가 명확하지 않으면 잘 되는 브랜드를 볼 때마다 흔들릴 수밖에 없어요. 차별성은 더 잘하는 게 아닙니다. 다르게 정의하는 거예요.",
+      insight: "기준이 밖에 있고, 계속 흔들리는 상태입니다. 앎이 없는 상태예요. 노력이 부족한 게 아닙니다. 내 브랜드가 고객의 어떤 문제를 해결하는지가 명확하지 않으면 잘 되는 브랜드를 볼 때마다 흔들릴 수밖에 없어요. 차별성은 더 잘하는 게 아닙니다. 다르게 정의하는 거예요.",
       pains: [
         "열심히 올리는데 반응이 없다. 뭐가 문제인지 모르겠다",
         "잘 되는 브랜드 볼 때마다 나도 저렇게 해야 하나 싶어서 방향이 계속 바뀐다",
@@ -88,19 +86,19 @@ const EDIT = {
       guide_title: "차별성은 더 잘하는 게 아니라 다르게 정의하는 것입니다",
       guide: "'내 브랜드는 누구의 어떤 문제를 해결하는가'를 한 문장으로 정의하는 것이 먼저입니다. 이게 없으면 콘텐츠도, 상품도 다 방향이 없어요. 아뜰리에사계는 불안형 브랜드가 자기 차별성을 찾고 정의하는 과정을 함께합니다."
     },
-    Av: {
-      label: "회피형",
-      title: "무언가를 열심히 하고 있지만,\n그게 매출로 연결되지 않습니다.",
-      insight: "게으른 게 아닙니다. 지금 하는 것들이 고객이 아닌 나 중심으로 돌아가고 있을 가능성이 높아요. 브랜드는 내가 하고 싶은 것이 아니라 고객의 문제를 해결하는 것입니다.",
+    D: {
+      label: "방어형",
+      title: "자기만의 철학이 있습니다.\n그런데 그 철학이 지금 벽이 되고 있어요.",
+      insight: "기준이 안에 있지만, 현재와 단절되어 있는 상태입니다. 앎이 굳어버린 상태예요.\n\n오래 쌓아온 기준이 있어요. \"이건 우리 결이 아니야.\" \"이 방식은 나랑 안 맞아.\" 틀린 말이 아닙니다. 근데 그 말이 반복될수록 실행이 줄어듭니다. 막히는 이유는 찾는데, 뚫는 방법은 찾지 않게 돼요.\n\n필요한 건 철학을 버리는 게 아닙니다. 내 철학을 지금 이 시대에 어떻게 적용할지 아는 것입니다.",
       pains: [
-        "하루하루 바쁜데 한 달이 지나도 매출이 그대로다",
-        "내 브랜드가 고객의 어떤 문제를 해결하는지 생각해본 적이 별로 없다",
-        "내 눈엔 좋아 보이는데 고객 반응이 없다. 왜인지 모르겠다",
-        "중요한 걸 해야 한다는 건 아는데 자꾸 미뤄진다",
-        "이것저것 하는데 어느 것도 제대로 된 결과가 없다"
+        "내 기준은 분명한데, 그게 실행을 막는 이유가 되고 있다",
+        "시대가 바뀐 건 아는데 내 방식을 바꾸는 게 타협처럼 느껴진다",
+        "열심히 하는데 매출로 연결이 안 된다. 뭔가 어긋나 있는 느낌이다",
+        "막히는 이유는 잘 설명할 수 있는데, 뚫는 방법은 잘 모르겠다",
+        "브랜드의 결은 지키고 싶은데, 고객이 그걸 알아주지 않는 것 같다"
       ],
-      guide_title: "열심히 하는 것과 잘 하는 것은 다릅니다",
-      guide: "'내가 지금 하는 것들 중 고객이 돈을 내는 이유가 되는 게 무엇인가?' 이 기준 하나만 바뀌어도 지금 하는 것들의 효율이 달라져요. 아뜰리에사계는 회피형 브랜드가 고객 중심으로 운영 방식을 재설계하는 과정을 함께합니다."
+      guide_title: "철학을 버리는 게 아니라 지금에 맞게 재적용하는 것입니다",
+      guide: "철학이 있다는 건 강점입니다. 문제는 그 철학이 현재와 연결되지 않을 때예요. 막는 것을 직시하고, 시대를 탓하지 않고 수용하고, 내 철학을 지금 고객의 언어로 다시 번역하는 것 — 그게 방어형 브랜드에 필요한 다음 단계입니다."
     }
   }
 };
@@ -111,37 +109,27 @@ const EDIT = {
 
 <style>
 :root{
-  --bg:#FAFAF8; --bg2:#F3F2EE;
-  --ink:#1A1A18; --ink2:#5A5A52; --ink3:#9A9A90;
-  --gold:#B8965A; --border:rgba(26,26,24,.1);
-  --serif:'Noto Serif KR',serif; --sans:'Noto Sans KR',sans-serif;
+  --bg:#FAFAF8;--bg2:#F3F2EE;
+  --ink:#1A1A18;--ink2:#5A5A52;--ink3:#9A9A90;
+  --gold:#B8965A;--border:rgba(26,26,24,.1);
+  --serif:'Noto Serif KR',serif;--sans:'Noto Sans KR',sans-serif;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:16px}
 body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;line-height:1.8;min-height:100vh;-webkit-font-smoothing:antialiased}
 .page{max-width:520px;margin:0 auto;padding:0 1.5rem}
-
-/* 헤더 */
 .top{display:flex;justify-content:center;align-items:center;padding:2.25rem 0 1.75rem;border-bottom:0.5px solid var(--border);margin-bottom:3rem}
 .logo{font-family:var(--serif);font-size:13px;font-weight:400;letter-spacing:.1em;color:var(--ink)}
 .logo-dot{color:var(--gold)}
-
-/* step */
 .step{display:none}.step.active{display:block}
-
-/* 인트로 */
 .intro-tag{font-size:10px;letter-spacing:.14em;color:var(--gold);text-transform:uppercase;margin-bottom:1.1rem;font-weight:400}
 .intro-title{font-family:var(--serif);font-size:clamp(1.6rem,5vw,2.15rem);font-weight:300;line-height:1.42;color:var(--ink);margin-bottom:1rem;letter-spacing:-.01em;white-space:pre-line}
 .intro-title em{font-style:normal;border-bottom:1px solid var(--gold);padding-bottom:1px}
 .intro-desc{font-size:14px;color:var(--ink2);line-height:1.85;margin-bottom:2.25rem;white-space:pre-line}
 .start-btn{width:100%;padding:15px;background:var(--ink);color:var(--bg);border:none;font-family:var(--sans);font-size:14px;font-weight:400;letter-spacing:.06em;cursor:pointer;transition:opacity .2s}
 .start-btn:hover{opacity:.82}
-
-/* 진행 바 */
 .pbar-track{height:1px;background:var(--border);margin-bottom:2.5rem}
 .pbar-fill{height:100%;background:var(--gold);transition:width .5s ease}
-
-/* 질문 */
 .q-tag{font-size:10px;letter-spacing:.12em;color:var(--ink3);text-transform:uppercase;margin-bottom:.7rem;font-weight:400}
 .q-text{font-family:var(--serif);font-size:clamp(1.05rem,2.8vw,1.28rem);font-weight:400;color:var(--ink);line-height:1.65;margin-bottom:2rem}
 .yn-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -154,14 +142,12 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:3
 .q-back{font-size:12px;color:var(--ink3);background:none;border:none;cursor:pointer;font-family:var(--sans);letter-spacing:.04em}
 .q-back:hover{color:var(--ink2)}
 .q-counter{font-size:11px;color:var(--ink3);letter-spacing:.06em}
-
-/* 결과 */
 .res-badge{display:inline-block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:4px 14px;border-radius:20px;margin-bottom:1.25rem;font-weight:400}
 .badge-S{background:#EFF5E8;color:#3A5A1A;border:0.5px solid #A0C070}
 .badge-A{background:#FAF0E0;color:#7A5010;border:0.5px solid #D4A050}
-.badge-Av{background:#F8ECE8;color:#6A2A10;border:0.5px solid #C07050}
+.badge-D{background:#EEE8F5;color:#4A2A7A;border:0.5px solid #A080C0}
 .res-title{font-family:var(--serif);font-size:clamp(1.15rem,3vw,1.48rem);font-weight:400;line-height:1.5;color:var(--ink);margin-bottom:1rem;white-space:pre-line}
-.res-insight{font-size:14px;color:var(--ink2);line-height:1.9;padding:1.1rem 1.3rem;border-left:1.5px solid var(--gold);background:var(--bg2);margin-bottom:1.5rem}
+.res-insight{font-size:14px;color:var(--ink2);line-height:1.9;padding:1.1rem 1.3rem;border-left:1.5px solid var(--gold);background:var(--bg2);margin-bottom:1.5rem;white-space:pre-line}
 .pain-label{font-size:10px;letter-spacing:.12em;color:var(--ink3);text-transform:uppercase;margin-bottom:.7rem;font-weight:400}
 .pain-list{list-style:none;margin-bottom:1.5rem}
 .pain-list li{font-size:13px;color:var(--ink2);padding:.6rem 0;border-bottom:0.5px solid var(--border);line-height:1.65;display:flex;gap:.75rem}
@@ -171,8 +157,6 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:3
 .guide-tag{font-size:10px;letter-spacing:.12em;color:var(--gold);text-transform:uppercase;margin-bottom:.4rem;font-weight:400}
 .guide-title{font-family:var(--serif);font-size:15px;font-weight:400;color:var(--ink);margin-bottom:.6rem;line-height:1.45}
 .guide-body{font-size:13px;color:var(--ink2);line-height:1.85}
-
-/* 이메일 */
 .email-wrap{border-top:0.5px solid var(--border);padding-top:1.5rem;margin-top:.25rem}
 .email-label{font-size:13px;color:var(--ink2);margin-bottom:.9rem;line-height:1.7}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
@@ -187,11 +171,8 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:3
 .done-msg span{font-size:12px;color:var(--ink3)}
 .restart-btn{width:100%;padding:11px;margin-top:10px;font-size:12px;letter-spacing:.06em;background:none;border:0.5px solid var(--border);cursor:pointer;color:var(--ink3);font-family:var(--sans)}
 .restart-btn:hover{color:var(--ink2);border-color:var(--ink2)}
-
-/* 하단 */
 .bottom{text-align:center;padding:2.75rem 0 2.5rem;margin-top:3rem;border-top:0.5px solid var(--border)}
 .bottom-logo{font-family:var(--serif);font-size:12px;color:var(--ink3);letter-spacing:.1em}
-
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 .fade{animation:fadeUp .55s ease both}
 .d1{animation-delay:.1s}.d2{animation-delay:.2s}.d3{animation-delay:.32s}
@@ -200,12 +181,10 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:3
 <body>
 <div class="page">
 
-  <!-- 로고 -->
   <div class="top">
     <div class="logo" id="el-logo"></div>
   </div>
 
-  <!-- 인트로 -->
   <div class="step active" id="s-intro">
     <div class="intro-tag fade" id="el-tagline"></div>
     <h1 class="intro-title fade d1" id="el-title"></h1>
@@ -213,7 +192,6 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:3
     <button class="start-btn fade d3" id="el-btn" onclick="startTest()"></button>
   </div>
 
-  <!-- 질문 -->
   <div class="step" id="s-q">
     <div class="pbar-track"><div class="pbar-fill" id="pbar" style="width:0%"></div></div>
     <div class="q-tag"  id="q-tag"></div>
@@ -228,12 +206,10 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:3
     </div>
   </div>
 
-  <!-- 결과 -->
   <div class="step" id="s-result">
     <div id="res-content"></div>
   </div>
 
-  <!-- 하단 -->
   <div class="bottom">
     <div class="bottom-logo" id="el-footer"></div>
   </div>
@@ -241,23 +217,21 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:3
 </div>
 
 <script>
-/* EDIT 객체로 HTML 채우기 */
-document.getElementById('el-logo').innerHTML    = EDIT.logo + ' <span class="logo-dot">✦</span>';
+document.getElementById('el-logo').innerHTML      = EDIT.logo + ' <span class="logo-dot">✦</span>';
 document.getElementById('el-tagline').textContent = EDIT.tagline;
 document.getElementById('el-title').textContent   = EDIT.title;
 document.getElementById('el-desc').textContent    = EDIT.desc;
 document.getElementById('el-btn').textContent     = EDIT.btn;
 document.getElementById('el-footer').textContent  = EDIT.footer;
 
-/* 테스트 로직 */
 const Qs = EDIT.questions;
 const RD = {
-  S:  { badge:'badge-S',  ...EDIT.results.S  },
-  A:  { badge:'badge-A',  ...EDIT.results.A  },
-  Av: { badge:'badge-Av', ...EDIT.results.Av }
+  S: { badge:'badge-S', ...EDIT.results.S  },
+  A: { badge:'badge-A', ...EDIT.results.A  },
+  D: { badge:'badge-D', ...EDIT.results.D  }
 };
 
-let ans=[], cur=0, yC=0, nA=0, nAv=0;
+let ans=[], cur=0, yC=0, nA=0, nD=0;
 
 function startTest(){
   document.getElementById('s-intro').classList.remove('active');
@@ -278,7 +252,7 @@ function renderQ(){
 function pick(v){
   if(ans[cur]!==undefined){
     if(ans[cur]==='Y') yC--;
-    else{ if(Qs[cur].no==='A') nA--; else nAv--; }
+    else{ if(Qs[cur].no==='A') nA--; else nD--; }
   }
   ans[cur]=v;
   if(v==='Y'){
@@ -286,7 +260,7 @@ function pick(v){
     document.getElementById('btn-yes').className='yn-btn sel-yes';
     document.getElementById('btn-no').className='yn-btn';
   } else {
-    if(Qs[cur].no==='A') nA++; else nAv++;
+    if(Qs[cur].no==='A') nA++; else nD++;
     document.getElementById('btn-no').className='yn-btn sel-no';
     document.getElementById('btn-yes').className='yn-btn';
   }
@@ -296,7 +270,7 @@ function pick(v){
 function prevQ(){
   if(cur>0){
     if(ans[cur-1]==='Y') yC--;
-    else{ if(Qs[cur-1].no==='A') nA--; else nAv--; }
+    else{ if(Qs[cur-1].no==='A') nA--; else nD--; }
     ans.splice(cur-1,1); cur--; renderQ();
   } else {
     document.getElementById('s-q').classList.remove('active');
@@ -306,7 +280,7 @@ function prevQ(){
 
 function showResult(){
   document.getElementById('pbar').style.width='100%';
-  const type = yC>=7?'S':(nA>=nAv?'A':'Av');
+  const type = yC>=7?'S':(nA>=nD?'A':'D');
   const r = RD[type];
   document.getElementById('s-q').classList.remove('active');
   document.getElementById('s-result').classList.add('active');
@@ -327,38 +301,62 @@ function showResult(){
         <input class="field" type="text"  id="r-name"  placeholder="이름" />
         <input class="field" type="email" id="r-email" placeholder="이메일 주소" />
       </div>
-      <button class="sub-btn" onclick="doSubmit('${type}')">${EDIT.email_btn}</button>
+      <button class="sub-btn" onclick="doSubmit('${type}','${r.label}')">${EDIT.email_btn}</button>
       <div class="form-note">${EDIT.email_note}</div>
     </div>
     <button class="restart-btn" onclick="restart()">처음부터 다시 하기</button>
   `;
 }
 
-async function doSubmit(type){
+async function doSubmit(typeCode, typeLabel){
   const name  = document.getElementById('r-name').value.trim() || '대표님';
   const email = document.getElementById('r-email').value.trim();
   if(!email||!email.includes('@')){ alert('이메일을 올바르게 입력해주세요.'); return; }
   const btn = document.querySelector('.sub-btn');
-  btn.textContent='전송 중...'; btn.disabled=true;
+  btn.textContent='처리 중...'; btn.disabled=true;
+  await addToStibee(name, email, typeLabel);
+  await sendBackupEmail(name, email, typeCode, typeLabel);
+  document.querySelector('.email-wrap').innerHTML=`
+    <div class="done-msg">
+      <strong>${name}님, 신청이 완료됐습니다</strong>
+      <span style="display:block;margin-bottom:4px">${email}로 인사이트를 보내드립니다</span>
+      <span style="font-size:11px;color:#B8965A">진단 유형 : ${typeLabel}</span>
+    </div>`;
+}
+
+async function addToStibee(name, email, typeLabel){
+  if(EDIT.stibee_api_key.includes('여기에')) return false;
+  try{
+    await fetch(`https://api.stibee.com/v1/lists/${EDIT.stibee_list_id}/subscribers`,{
+      method:'POST',
+      headers:{'AccessToken':EDIT.stibee_api_key,'Content-Type':'application/json'},
+      body:JSON.stringify({
+        subscribers:[{ email, name, customFields:{ brand_type: typeLabel }}],
+        groupNames:[ typeLabel ],
+        eventOccurredBy:'SUBSCRIPTION_PAGE',
+        confirmEmailYN:'N'
+      })
+    });
+  } catch(e){}
+}
+
+async function sendBackupEmail(name, email, typeCode, typeLabel){
   try{
     await fetch('https://formsubmit.co/ajax/ssfwteam@gmail.com',{
       method:'POST',
       headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body:JSON.stringify({ name, email, type,
-        _subject:`[아뜰리에사계] ${type} / ${name}`,
+      body:JSON.stringify({
+        _subject:'[아뜰리에사계] 새 구독자',
+        이름: name, 이메일: email,
+        유형코드: typeCode, 유형: typeLabel,
         _captcha:'false'
       })
     });
   } catch(e){}
-  document.querySelector('.email-wrap').innerHTML=`
-    <div class="done-msg">
-      <strong>${name}님, 신청이 완료됐습니다</strong>
-      <span>${email}로 인사이트를 보내드립니다</span>
-    </div>`;
 }
 
 function restart(){
-  ans=[];cur=0;yC=0;nA=0;nAv=0;
+  ans=[];cur=0;yC=0;nA=0;nD=0;
   document.getElementById('s-result').classList.remove('active');
   document.getElementById('s-intro').classList.add('active');
 }
